@@ -870,6 +870,7 @@ def upload_file():
        if os.path.isdir(t1):
            shutil.rmtree("%d"%t1)
        t1=t1+1
+       if os.path
        if not file.filename:
            return render_template("home.html", messaage="Select File First !")
            
