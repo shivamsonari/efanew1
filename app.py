@@ -13,26 +13,18 @@ from flask import *
 from werkzeug.utils import secure_filename
 import openpyxl
 from flask_session import Session
-import time
-from time import sleep
+
 
 
 
 app = Flask(__name__)
 t1=0
-app.config['UPLOAD_EXTENSIONS'] = ['.xls', '.xlsx']
+app.config['UPLOAD_EXTENSIONS'] = ['.xlsx']
 app.secret_key = 'SECRET KEY'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-
-
-
-
-
-    
+   
 def createcommand(command, key, value):
-    
-    
         
     if (value!='dummy'):
         
@@ -86,7 +78,7 @@ def generate():
         sheet_names = xls.sheet_names()
 
            
-        zipf = zipfile.ZipFile('Name.zip','w', zipfile.ZIP_DEFLATED)
+        zipf = zipfile.ZipFile('efacli.zip','w', zipfile.ZIP_DEFLATED)
         df_global = pd.read_excel(inputFile, sheet_name='Global', engine='openpyxl')
         df_global = df_global.replace(np.nan, 'dummy')
         
@@ -148,10 +140,6 @@ def generate():
 	                       
 	                       
                         
-               
-                        
-               
-			         
                         lst1 = []
                         for i in tenant:
                             
@@ -848,9 +836,9 @@ def generate():
     shutil.rmtree(session['path'])
     session.pop('path',None)
     session.pop('file',None)
-    return send_file('Name.zip',
+    return send_file('efacli.zip',
             mimetype = 'zip',
-            attachment_filename= 'Name.zip',
+            attachment_filename= 'efacli.zip',
             as_attachment = True)
 
 
@@ -868,6 +856,11 @@ def upload_file():
    
     if request.method == 'POST':
        file = request.files['file']
+       filename1=secure_filename(file.filename)
+       if filename1 != '':
+           file_ext=os.path.splitext(filename1)[1]
+           if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+               return render_template("home.html", messaage="Wrong File type, only 'xlsx' format allowed !")
        t1=t1+1
        
        if os.path.isdir(str(t1)):
@@ -881,17 +874,13 @@ def upload_file():
        if not session.get("file"):
            return render_template("home.html", messaage="Select File First !")
           
-       
-       
-       
-           
-           
+                  
        file.save("%d/%s"%(t1,file.filename))
           
        if session.get("file"):
            file1=session["file"]
            flash(f"{file1} uploaded successfully, now you can generate sheets","info")
-           return redirect(url_for("home"))
+           return redirect(url_for("home"))        
     else:
        
         return render_template("home.html")
