@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EFA CLI Automation</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, textarea, label { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      position: absolute;
+      margin: 0;
+      line-height: 45px;
+      font-size: 45px;
+      color: #fff;
+      z-index: 2;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 20px;
+      }
+      form {
+      width: 96.6%;
+      padding: 20px;
+      border-radius: 6px;
+      background: #eee;
+      }
+      .banner {
+      position: relative;
+      height: 320px;
+      background-image: url(https://aithority.com/wp-content/uploads/2019/11/Extreme-Networks-Brings-Simplicity-to-Data-Center-Operations-with-New-Fabric-Automation-Capabilities.jpg);  
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+      .banner::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.4); 
+      position: absolute;
+   width: 100%;
+      height: 100%;
+      }
+      input,  textarea {
+      margin-bottom: 0px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 40px);
+      padding: 5px;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 40%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px; 
+      background: #008080;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+    margin-left: 415px;
+    margin-top: 40px;
+      }
+      button:hover {
+      background: #790e06;
+      }
+     
+      .name-item input, .name-item div {
+      width: calc(50% - 20px);
+      }
+        .Column1{
+          float: left;
+          width:41.3%;
+          margin-left :1px;
+        }
+        .Column2{
+          float:left;
+          width:40.3%;
+        }
+        .Column3{
+          float:left;
+          width:14.4%;
+          
+        }
+        .check1{
+          position:relative;
+              width: auto;
+          margin-left:100px;
+        }
+        .check2{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:71px;
+        }
+        .check3{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:78px;
+        }
+        .check4{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:100px;
+          
+        }
+        .check5{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:26px;
+          
+        }
+        .check6{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:67px;
+          
+        }
+        .check7{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:90px;
+          
+        }
+        .check8{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:91px;
+          
+        }
+        .check9{
+          margin-bottom:0px;
+              width: auto;
+          margin-left:109px;
+        }
+      .fileUpload{
+          width:75%;       
+          margin-left: 0px;
+		  
+        }
+      .ch10{
+        margin-left:109px;
+      }
+      .topComponent{
+        margin-top:0px;
+        width:40%;
+          position:center;
+        float:left;
+      }
+      .bodyComponent{
+        margin-top:0px;
+        position:center;
+        float:right;
+        width: 32%;
+        background: #eee;
+        padding: 27px
+        
+      }
+      .baseComponent{
+        margin-top:250px;
+          
+      }
+		
+		
+    </style>
+        
+  </head>
+  <body>
+    
+      
+        <div class="banner">
+          <h1>EFA CLI Automation</h1>
+        </div>
+				
+				<div class="topComponent">
+        <Form Method="POST" Action="/uploader" enctype = "multipart/form-data" class="fileUpload">
+
+	         <input type = "file" name = "file" />
+		
+    		     <p><strong>{{messaage}}</strong></p>
+				 
+		{%with messages = get_flashed_messages() %}
+		    {% if messages %}
+			    {% for msg in messages %}
+				    <p><strong>{{msg}}</strong></p>
+			    {% endfor %}
+			{% endif %}
+        {% endwith %}		 
+				 
+          </br>
+			     <button type="submit" class="ch10">Upload file</button>
+				 
+                 
+                  </Form>
+              </div>
+				  <div class="bodyComponent">
+				 <div class="fileUpload">
+                 <h2 class="load1">To get a sample EFA_Datafill file click the below 'Download' link</h2>
+                     <p>
+                        <a href="{{url_for('download_file')}}">Download</a></div>
+                     </p>						
+                   <br>
+        </div>
+              </div>
+               <div class="baseComponent">
+		<p style="color:red;font-size:17px;text-align: center;"><strong>{{mg}}</strong></p>
+		<p style="color:black;font-size:25px;text-align: center;" id="SelectSheet">Select Sheets To Be Generated</p>
+		
+        <Form Method="POST" Action="/generate">
+          <div>
+          <div class = "Column1">
+		   <div>
+          <label>Tenant</label>
+          <Input Type="checkbox" name=sheet value="Tenant" class= "check1"></div>
+		  <br>
+            
+            <div>
+           <label>Tenant VRF</label>
+           <Input Type="checkbox" name=sheet value="Tenant VRF" class= "check2"></div>
+		   <br>
+		   <div>
+		   <label>Tenant PO</label>
+         <Input Type="checkbox" name=sheet value="Tenant PO" class= "check3"></div></div>
+              <div class="Column2">
+		   <div>
+		   <label>Tenant EPG</label>
+		   <Input Type="checkbox" name=sheet value="Tenant EPG" class= "check4"></div>
+		   <br>
+		   <div>
+		   <label>Tenant BGP Peer-Group</label>
+		   <Input Type="checkbox" name=sheet value="Tenant BGP Peer-Group"class= "check5"></div>
+		   <br>
+		   <div>
+		   <label>Tenant BGP Peer</label>
+         <Input Type="checkbox" name=sheet value="Tenant BGP Peer"class= "check6"></div></div>
+         <div class= "Column3">
+		   <div>
+		   <label>Inventory</label>
+		   <Input Type="checkbox" name=sheet value="Inventory" class= "check7"></div>
+		   <br>
+		   <div>
+		   <label>Breakout</label>
+		   <Input Type="checkbox" name=sheet value="Breakout" class= "check8"></div>
+		   <br>
+		   <div>
+		   <label>Fabric</label>
+         <Input Type="checkbox" name=sheet value="Fabric" class= "check9"></div></div>
+		 <br>
+		 
+		
+		  
+         <button type="submit" class= "generateBtn">Generate</button>
+		  
+		      </div>
+         </div>
+		 
+		   </Form>   
+  </body>
+</html>
+
+
+
+
+
+
