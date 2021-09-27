@@ -13,6 +13,7 @@ from flask import *
 from werkzeug.utils import secure_filename
 import openpyxl
 from flask_session import Session
+import time
 
 
 
@@ -852,8 +853,7 @@ def download_file():
 def upload_file():
     
     global t1
-    
-   
+     
     if request.method == 'POST':
        file = request.files['file']
        filename1=secure_filename(file.filename)
@@ -865,18 +865,20 @@ def upload_file():
        if not file.filename:
            return render_template("home.html", messaage="Select File First !")     
        t1=t1+1
-       
-       
+           
        if os.path.isdir(str(t1)):
-           for i in range(0,20):
+           for i in range(0,400):
+               present = time.time()
+               olderThanDays=900
+               subDirPath="%d/"%t1
+               if (present - os.path.getmtime(subDirPath)) > olderThanDays:
+                   shutil.rmtree(subDirPath)
+                   
                t1=t1+1
                if os.path.isdir(str(t1)):
-                   continue
-               else:
-                   break
-               
-               
-           
+                   continue 
+               break
+              
        os.mkdir(str(t1))
        session['path']="%d"%t1
        session["file"]="%d/%s"%(t1,file.filename)
