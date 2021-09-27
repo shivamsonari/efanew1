@@ -861,12 +861,21 @@ def upload_file():
            file_ext=os.path.splitext(filename1)[1]
            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
                return render_template("home.html", messaage="Wrong File type, only 'xlsx' format allowed !")
+           
+       if not file.filename:
+           return render_template("home.html", messaage="Select File First !")     
        t1=t1+1
        
+       
        if os.path.isdir(str(t1)):
-           shutil.rmtree(str(t1))
-       if not file.filename:
-           return render_template("home.html", messaage="Select File First !")
+           for i in range(0,20):
+               t1=t1+1
+               if os.path.isdir(str(t1)):
+                   continue
+               else:
+                   break
+               
+               
            
        os.mkdir(str(t1))
        session['path']="%d"%t1
